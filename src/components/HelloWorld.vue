@@ -6,6 +6,9 @@
       check out the
       <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
     </p>
+    <div class="text-blue-500">TailwindCSS Blue</div>
+    <div class="text-red-500">TailwindCSS Red</div>
+    <font-awesome-icon icon="user-secret" />
     <h3>Installed CLI Plugins</h3>
     <ul>
       <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
