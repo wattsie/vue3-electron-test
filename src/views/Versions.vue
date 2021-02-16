@@ -1,13 +1,13 @@
 <template>
   <div class="dark about">
     <div class="pb-3">Information</div>
-    <div class="flex">
+    <div class="flex flex-col">
       <div class="w-1/2 m-auto rounded-t-xl overflow-hidden bg-gradient-to-r from-teal-900 to-teal-700 p-10">
         <table class="m-auto table-auto text-left">
           <thead>
           <tr class="">
             <th class="w-1/4 flex-nowrap">Parameter</th>
-            <th class="w-1/4">Version</th>
+            <th class="w-1/2">Version</th>
           </tr>
           </thead>
           <tbody>
@@ -46,6 +46,27 @@
           </tbody>
         </table>
       </div>
+      <div class="p-2"></div>
+      <div class="w-1/2 m-auto rounded-t-xl overflow-hidden bg-gradient-to-r from-teal-900 to-teal-700 p-10">
+        <table class="m-auto table-auto text-left">
+          <thead>
+          <tr>
+            <th class="w-1/4">Package</th>
+            <th class="w-1/2">Version</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>Platform</td>
+            <td>{{ platform }}</td>
+          </tr>
+          <tr v-for="lib in versionsKeys" :key="lib">
+            <td>{{ lib }}</td>
+            <td>{{ versions[lib] }}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </template>
@@ -55,7 +76,8 @@ import {Options, Vue} from 'vue-class-component'
 
 @Options({})
 export default class Versions extends Vue {
-
+  versions: NodeJS.ProcessVersions | undefined
+  versionsKeys: string[] | undefined
   chrome = ''
   electron = ''
   node = ''
@@ -66,10 +88,11 @@ export default class Versions extends Vue {
   app: string | undefined
 
   created() {
-    const versions = process.versions
-    this.chrome = versions['chrome']
-    this.electron = versions['electron']
-    this.node = versions['node']
+    this.versions = process.versions
+    this.versionsKeys = Object.keys(process.versions).sort()
+    this.chrome = this.versions['chrome']
+    this.electron = this.versions['electron']
+    this.node = this.versions['node']
     this.path = this.$route.path
     this.name = this.$route.name
     this.platform = require('os').platform()
